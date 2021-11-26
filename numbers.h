@@ -44,15 +44,17 @@ struct bits8 bits8_from_int(unsigned int x){
 
 
 unsigned int bits8_to_int(struct bits8 x){
-  bit_to_int(x.b0) * pow(2,0) +
-  bit_to_int(x.b1) * pow(2,1) +
-  bit_to_int(x.b2) * pow(2,2) +
-  bit_to_int(x.b3) * pow(2,3) +
-  bit_to_int(x.b4) * pow(2,4) +
-  bit_to_int(x.b5) * pow(2,5) +
-  bit_to_int(x.b6) * pow(2,6) +
-  bit_to_int(x.b7) * pow(2,7);
+  int final =
+    (bit_to_int(x.b0) << 0) +
+    (bit_to_int(x.b1) << 1) +
+    (bit_to_int(x.b2) << 2) +
+    (bit_to_int(x.b3) << 3) +
+    (bit_to_int(x.b4) << 4) +
+    (bit_to_int(x.b5) << 5) +
+    (bit_to_int(x.b6) << 6) +
+    (bit_to_int(x.b7) << 7);
 
+  return final;
 }
 void bits8_print(struct bits8 v){
   
