@@ -49,6 +49,6 @@ int main() {
   printf("Expected 11110\n");
   bits8_print(bits8_add(bits8_from_int(20), bits8_from_int(10)));
   printf("Expected 11110\n");
-  bits8_print(bits8_add(bits8_from_int(99), bits8_from_int(1)));
-  printf("Expected 1100100\n");
+  bits8_print(bits8_add(bits8_from_int(35), bits8_from_int(40)));
+  printf("Expected 75: 1001011\n");
 }

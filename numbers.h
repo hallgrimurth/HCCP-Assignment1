@@ -98,28 +98,27 @@ struct bits8 bits8_xor(struct bits8 x, struct bits8 y){
 struct bits8 bits8_add(struct bits8 x, struct bits8 y){
   struct bit c;
   struct bits8 z;
-  //does not fully work
   c.v = 0;
   z.b0 = bit_xor(x.b0, y.b0);
-  c =  bit_and(x.b0, y.b0);
+  c =  bit_xor(bit_and(c, x.b0), bit_and(x.b0, y.b0));
 
   z.b1 = bit_xor(bit_xor(c,x.b1), y.b1);
-  c =  bit_and(x.b1, y.b1);
+  c =  bit_xor(bit_and(c, x.b1), bit_and(x.b1, y.b1));
 
   z.b2 = bit_xor(bit_xor(c,x.b2), y.b2);
-  c =  bit_and(x.b2, y.b2);
+  c =  bit_xor(bit_and(c, x.b2), bit_and(x.b2, y.b2));
 
   z.b3 = bit_xor(bit_xor(c,x.b3), y.b3);
-  c =  bit_and(x.b3, y.b3);
+  c =  bit_xor(bit_and(c, x.b3), bit_and(x.b3, y.b3));
 
   z.b4 = bit_xor(bit_xor(c,x.b4), y.b4);
-  c =  bit_and(x.b4, y.b4);
+  c =  bit_xor(bit_and(c, x.b4), bit_and(x.b4, y.b4));
 
   z.b5 = bit_xor(bit_xor(c,x.b5), y.b5);
-  c =  bit_and(x.b5, y.b5);
+  c =  bit_xor(bit_and(c, x.b5), bit_and(x.b5, y.b5));
 
   z.b6 = bit_xor(bit_xor(c,x.b6), y.b6);
-  c =  bit_and(x.b6, y.b6);
+  c =  bit_xor(bit_and(c, x.b6), bit_and(x.b6, y.b6));
 
   z.b7 = bit_xor(bit_xor(c,x.b7), y.b7);
   
