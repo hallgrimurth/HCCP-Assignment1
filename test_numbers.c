@@ -21,19 +21,19 @@ int main() {
   printf("Expected 01111011\n");
 
   printf("%i\n",bits8_to_int(bits8_from_int(1)));
-  printf("Expected 00000001\n");
+  printf("Expected 1\n");
   printf("%i\n",bits8_to_int(bits8_from_int(2)));
-  printf("Expected 00000010\n");
+  printf("Expected 2\n");
   printf("%i\n",bits8_to_int(bits8_from_int(4)));
-  printf("Expected 00000100\n");
+  printf("Expected 4\n");
   printf("%i\n",bits8_to_int(bits8_from_int(5)));
-  printf("Expected 00000101\n");
+  printf("Expected 5\n");
   printf("%i\n",bits8_to_int(bits8_from_int(8)));
-  printf("Expected 00001000\n");
+  printf("Expected 8\n");
   printf("%i\n",bits8_to_int(bits8_from_int(15)));
-  printf("Expected 00001111\n");
+  printf("Expected 15\n");
   printf("%i\n",bits8_to_int(bits8_from_int(6)));
-  printf("Expected 00000110\n");
+  printf("Expected 6\n");
   printf("%i\n",bits8_to_int(bits8_from_int(123)));
   printf("Expected 123\n");
 
@@ -42,4 +42,13 @@ int main() {
 
   printf("%i\n",set_bit(2,0));
   printf("%i\n",set_bit(2,1));
+
+  bits8_print(bits8_add(bits8_from_int(5), bits8_from_int(2)));
+  printf("Expected 00000111\n");
+  bits8_print(bits8_add(bits8_from_int(10), bits8_from_int(20)));
+  printf("Expected 11110\n");
+  bits8_print(bits8_add(bits8_from_int(20), bits8_from_int(10)));
+  printf("Expected 11110\n");
+  bits8_print(bits8_add(bits8_from_int(99), bits8_from_int(1)));
+  printf("Expected 1100100\n");
 }

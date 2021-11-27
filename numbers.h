@@ -41,10 +41,8 @@ struct bits8 bits8_from_int(unsigned int x){
 }
 
 
-
-
 unsigned int bits8_to_int(struct bits8 x){
-  int final =
+  int final = 
     (bit_to_int(x.b0) << 0) +
     (bit_to_int(x.b1) << 1) +
     (bit_to_int(x.b2) << 2) +
@@ -56,6 +54,7 @@ unsigned int bits8_to_int(struct bits8 x){
 
   return final;
 }
+
 void bits8_print(struct bits8 v){
   
   bit_print(v.b7);
@@ -82,7 +81,51 @@ struct bits8 bits8_and(struct bits8 x, struct bits8 y){
   z.b7 = bit_and(x.b7, y.b7);
   return z;
 }
-struct bits8 bits8_add(struct bits8 x, struct bits8 y);
+
+struct bits8 bits8_xor(struct bits8 x, struct bits8 y){
+  struct bits8 z;
+  z.b0 = bit_xor(x.b0, y.b0);
+  z.b1 = bit_xor(x.b1, y.b1);
+  z.b2 = bit_xor(x.b2, y.b2);
+  z.b3 = bit_xor(x.b3, y.b3);
+  z.b4 = bit_xor(x.b4, y.b4);
+  z.b5 = bit_xor(x.b5, y.b5);
+  z.b6 = bit_xor(x.b6, y.b6);
+  z.b7 = bit_xor(x.b7, y.b7);
+  return z;
+}
+
+struct bits8 bits8_add(struct bits8 x, struct bits8 y){
+  struct bit c;
+  struct bits8 z;
+  c.v = 0;
+  z.b0 = bit_xor(x.b0, y.b0);
+  c =  bit_and(x.b0, y.b0);
+
+  z.b1 = bit_xor(bit_xor(c,x.b1), y.b1);
+  c =  bit_and(x.b1, y.b1);
+
+  z.b2 = bit_xor(bit_xor(c,x.b2), y.b2);
+  c =  bit_and(x.b2, y.b2);
+
+  z.b3 = bit_xor(bit_xor(c,x.b3), y.b3);
+  c =  bit_and(x.b3, y.b3);
+
+  z.b4 = bit_xor(bit_xor(c,x.b4), y.b4);
+  c =  bit_and(x.b4, y.b4);
+
+  z.b5 = bit_xor(bit_xor(c,x.b5), y.b5);
+  c =  bit_and(x.b5, y.b5);
+
+  z.b6 = bit_xor(bit_xor(c,x.b6), y.b6);
+  c =  bit_and(x.b6, y.b6);
+
+  z.b7 = bit_xor(bit_xor(c,x.b7), y.b7);
+  
+ 
+  return z;
+}
+
 
 struct bits8 bits8_negate(struct bits8 x);
 struct bits8 bits8_mul(struct bits8 x, struct bits8 y);
