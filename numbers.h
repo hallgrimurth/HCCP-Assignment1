@@ -98,6 +98,7 @@ struct bits8 bits8_xor(struct bits8 x, struct bits8 y){
 struct bits8 bits8_add(struct bits8 x, struct bits8 y){
   struct bit c;
   struct bits8 z;
+  //does not fully work
   c.v = 0;
   z.b0 = bit_xor(x.b0, y.b0);
   c =  bit_and(x.b0, y.b0);
