@@ -1,6 +1,45 @@
 #include <stdlib.h>
 #include "numbers.h"
 
+void test_bits8_add(unsigned int x, unsigned int y){
+  struct bits8 got = bits8_add(bits8_from_int(x), bits8_from_int(y));
+  struct bits8 expected = bits8_from_int(x + y);
+  if (bits8_to_int(got) != bits8_to_int(expected)) {
+    printf("Input:     %u & %u\n", x, y);
+    printf("Got:       ");
+    bits8_print(got);
+    printf("Expected:  ");
+    bits8_print(expected);
+    exit(1);
+  } 
+}
+
+void test_bits8_negate(unsigned int x){
+  struct bits8 got = bits8_negate(bits8_from_int(x));
+  struct bits8 expected = bits8_from_int(~x + 1);
+  if (bits8_to_int(got) != bits8_to_int(expected)) {
+    printf("Input:     %u\n", x);
+    printf("Got:       ");
+    bits8_print(got);
+    printf("Expected:  ");
+    bits8_print(expected);
+    exit(1);
+  } 
+}
+
+void test_bits8_mul(unsigned int x, unsigned int y){
+  struct bits8 got = bits8_mul(bits8_from_int(x), bits8_from_int(y));
+  struct bits8 expected = bits8_from_int(x * y);
+  if (bits8_to_int(got) != bits8_to_int(expected)) {
+    printf("Input:     %u & %u\n", x, y);
+    printf("Got:       ");
+    bits8_print(got);
+    printf("Expected:  ");
+    bits8_print(expected);
+    exit(1);
+  } 
+}
+
 int main() {
   assert(bit_to_int(bits8_from_int(2).b0) == 0);
   printf("\nTesting bits8_from_int function\n");
@@ -13,23 +52,7 @@ int main() {
   printf("4 to binary | result:");
   bits8_print(bits8_from_int(4));
   printf("Expected:00000100\n");
-  printf("5 to binary | result:");
-  bits8_print(bits8_from_int(5));
-  printf("E5pected:00000101\n");
-  printf("8 to binary | result:");
-  bits8_print(bits8_from_int(8));
-  printf("Expected:00001000\n");
-  printf("15 to binary | result:");
-  bits8_print(bits8_from_int(15));
-  printf("Expected:00001111\n");
-  printf("6 to binary | result:");
-  bits8_print(bits8_from_int(6));
-  printf("Expected:00000110\n");
-  printf("123 to binary | result:");
-  bits8_print(bits8_from_int(123));
-  printf("Expected:01111011\n");
 
-  
   printf("\nTesting bits8_to_int function\n");
   printf("00000001 to int | result:%i\n",bits8_to_int(bits8_from_int(1)));
   printf("Expected:1\n");
@@ -37,53 +60,31 @@ int main() {
   printf("Expected:2\n");
   printf("00000100 to int | result:%i\n",bits8_to_int(bits8_from_int(4)));
   printf("Expected:4\n");
-  printf("00000101 to int | result:%i\n",bits8_to_int(bits8_from_int(5)));
-  printf("Expected:5\n");
-  printf("00001000 to int | result:%i\n",bits8_to_int(bits8_from_int(8)));
-  printf("Expected:8\n");
-  printf("00001111 to int | result:%i\n",bits8_to_int(bits8_from_int(15)));
-  printf("Expected:15\n");
-  printf("00000110 to int | result:%i\n",bits8_to_int(bits8_from_int(6)));
-  printf("Expected:6\n");
-  printf("01110011 to int | result:%i\n",bits8_to_int(bits8_from_int(123)));
-  printf("Expected:123\n");
+
   
   printf("\nTesting bits8_add function\n");
-  printf("5 + 2 | result:");
-  bits8_print(bits8_add(bits8_from_int(5), bits8_from_int(2)));
-  printf("Expected:00000111\n");
-  printf("-10 + 20 | result:");
-  bits8_print(bits8_add(bits8_from_int(-10), bits8_from_int(20)));
-  printf("Expected:00001010\n");
-  printf("20 + 10 | result:");
-  bits8_print(bits8_add(bits8_from_int(20), bits8_from_int(10)));
-  printf("Expected:00011110\n");
-  printf("35 + 40 | result:");
-  bits8_print(bits8_add(bits8_from_int(35), bits8_from_int(40)));
-  printf("Expected:01001011\n");
-
+  
+  test_bits8_add(5, 2);
+  test_bits8_add(-10, 20);
+  test_bits8_add(20, 10);
+  test_bits8_add(35, 40);
   assert((bits8_to_int(bits8_add(bits8_from_int(10),
 	 bits8_from_int ( 50 )))) == (( 10 + 50) & 0xFF));
 
   printf("\nTesting bits_negate function\n");
-  printf("Negating 00110111 | result:");
-  bits8_print(bits8_negate(bits8_from_int(55)));
-  printf("Expected:11001001\n");
-  printf("Negating 11111111 | result:");
-  bits8_print(bits8_negate(bits8_from_int(255)));
-  printf("Expected:00000001\n");
-  printf("Negating 00000001 | result:");
-  bits8_print(bits8_negate(bits8_from_int(1)));
-  printf("Expected:11111111\n");
-  printf("Negating 01010101 | result:");
-  bits8_print(bits8_negate(bits8_from_int(85)));
-  printf("Expected:10101011\n");
+ 
+  test_bits8_negate(55);
+  test_bits8_negate(255);
+  test_bits8_negate(1);
+  test_bits8_negate(85);
+  test_bits8_negate(3);
+  
   
   printf("\nTesting bits8_mul function\n");
-  printf("00000101 * 00001011 | result:");
-  bits8_print(bits8_mul(bits8_from_int(5), bits8_from_int(11)));
-  printf("Expected:00110111\n");
-
-  bits8_print(bits8_and_bit(bits8_from_int(2),bit_from_int(0)));
+  
+  test_bits8_mul(5,11);
+  test_bits8_mul(10,11);
+  test_bits8_mul(20,5);
+  test_bits8_mul(5,25);
 	      
 }
