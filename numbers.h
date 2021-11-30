@@ -40,7 +40,6 @@ struct bits8 bits8_from_int(unsigned int x){
   
 }
 
-
 unsigned int bits8_to_int(struct bits8 x){
   int final = 
     (bit_to_int(x.b0) << 0) +
@@ -79,6 +78,19 @@ struct bits8 bits8_and(struct bits8 x, struct bits8 y){
   z.b5 = bit_and(x.b5, y.b5);
   z.b6 = bit_and(x.b6, y.b6);
   z.b7 = bit_and(x.b7, y.b7);
+  return z;
+}
+
+struct bits8 bits8_or(struct bits8 x, struct bits8 y){
+  struct bits8 z;
+  z.b0 = bit_or(x.b0, y.b0);
+  z.b1 = bit_or(x.b1, y.b1);
+  z.b2 = bit_or(x.b2, y.b2);
+  z.b3 = bit_or(x.b3, y.b3);
+  z.b4 = bit_or(x.b4, y.b4);
+  z.b5 = bit_or(x.b5, y.b5);
+  z.b6 = bit_or(x.b6, y.b6);
+  z.b7 = bit_or(x.b7, y.b7);
   return z;
 }
 
@@ -126,7 +138,6 @@ struct bits8 bits8_add(struct bits8 x, struct bits8 y){
   return z;
 }
 
-
 struct bits8 bits8_negate(struct bits8 x){
   struct bits8 y;
   y.b0 = bit_not(x.b0);
@@ -141,4 +152,57 @@ struct bits8 bits8_negate(struct bits8 x){
   return bits8_add(y, bits8_from_int(1));
 }
 
-struct bits8 bits8_mul(struct bits8 x, struct bits8 y);
+struct bits8 bits8_and_bit(struct bits8 x, struct bit y){
+  struct bits8 z;
+  z.b0 = bit_and(x.b0,y);
+  z.b1 = bit_and(x.b1,y);
+  z.b2 = bit_and(x.b2,y);
+  z.b3 = bit_and(x.b3,y);
+  z.b4 = bit_and(x.b4,y);
+  z.b5 = bit_and(x.b5,y);
+  z.b6 = bit_and(x.b6,y);
+  z.b7 = bit_and(x.b7,y);
+
+  return z;
+}
+
+struct bits8 rightshift(struct bits8 x, int y){
+  struct bits8 z;
+  int a = bits8_to_int(x) << y;
+
+  return bits8_from_int(a);
+  
+
+  return z;
+}
+
+struct bits8 bits8_mul(struct bits8 x, struct bits8 y){
+  struct bits8 calc;
+  struct bits8 final;
+  calc = rightshift(bits8_and_bit(x,y.b0), 0);
+  final = calc;
+
+  calc = rightshift(bits8_and_bit(x,y.b1), 1);
+  final = bits8_add(calc,final);
+
+  calc = rightshift(bits8_and_bit(x,y.b2), 2);
+  final = bits8_add(calc,final);
+
+  calc = rightshift(bits8_and_bit(x,y.b3), 3);
+  final = bits8_add(calc,final);
+
+  calc = rightshift(bits8_and_bit(x,y.b4), 4);
+  final = bits8_add(calc,final);
+
+  calc = rightshift(bits8_and_bit(x,y.b5), 5);
+  final = bits8_add(calc,final);
+
+  calc = rightshift(bits8_and_bit(x,y.b6), 6);
+  final = bits8_add(calc,final);
+
+  calc = rightshift(bits8_and_bit(x,y.b7), 7);
+  final = bits8_add(calc,final);
+  
+  
+  return final;
+}

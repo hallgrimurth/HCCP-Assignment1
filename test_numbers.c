@@ -72,10 +72,18 @@ int main() {
   printf("Negating 11111111 | result:");
   bits8_print(bits8_negate(bits8_from_int(255)));
   printf("Expected:00000001\n");
+  printf("Negating 00000001 | result:");
+  bits8_print(bits8_negate(bits8_from_int(1)));
+  printf("Expected:11111111\n");
   printf("Negating 01010101 | result:");
   bits8_print(bits8_negate(bits8_from_int(85)));
   printf("Expected:10101011\n");
   
+  printf("\nTesting bits8_mul function\n");
+  printf("00000101 * 00001011 | result:");
+  bits8_print(bits8_mul(bits8_from_int(5), bits8_from_int(11)));
+  printf("Expected:00110111\n");
 
-   
+  bits8_print(bits8_and_bit(bits8_from_int(2),bit_from_int(0)));
+	      
 }
