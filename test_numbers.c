@@ -42,6 +42,9 @@ void test_bits8_mul(unsigned int x, unsigned int y){
 
 int main() {
   assert(bit_to_int(bits8_from_int(2).b0) == 0);
+  assert((bits8_to_int(bits8_add(bits8_from_int(10),
+	 bits8_from_int ( 50 )))) == (( 10 + 50) & 0xFF));
+  
   printf("\nTesting bits8_from_int function\n");
   printf("1 to binary | result:");
   bits8_print(bits8_from_int(1));
@@ -68,8 +71,7 @@ int main() {
   test_bits8_add(-10, 20);
   test_bits8_add(20, 10);
   test_bits8_add(35, 40);
-  assert((bits8_to_int(bits8_add(bits8_from_int(10),
-	 bits8_from_int ( 50 )))) == (( 10 + 50) & 0xFF));
+  
 
   printf("\nTesting bits_negate function\n");
  
